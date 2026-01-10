@@ -1,0 +1,240 @@
+/*Project: College Management System
+
+Description: A School Management System is crucial for efficiently managing college operations, including student enrolment, attendance,        grades, and timetable management. Using C language, we can provide all functionalities for college management system project.
+
+The functionality of the College Management System Project is mentioned below:
+
+·       Add Student Details
+
+·       Find the student by the given roll number
+
+·       Find the student by the given first name
+
+·       Find the students registered in a course
+
+·       Count of Students
+
+·       Delete a student
+
+·       Update Student*/
+
+//PROGRAM:
+
+#include<stdio.h>
+#include<string.h>
+#include<math.h>
+#include<stdlib.h>
+
+// To give Student serial no.
+int i=0;
+
+//Structure to get Student Details.
+
+struct s_detail{
+    char first_name[50];
+    char last_name[50];
+    int roll_num;
+    int course_id[5];
+    float CGPA;
+}
+std[100];
+
+//Function to add Student.
+
+void add_std(){
+    printf("Add the Detail of Student\n");
+    printf("------------------------------------------\n");
+    printf("Enter the first name of Student\n");
+    scanf("%s",&std[i].first_name);
+    printf("Enter the last name of Student\n");
+    scanf("%s",&std[i].last_name);
+    printf("Enter the Roll number of the Student\n");
+    scanf("%d",&std[i].roll_num);
+    printf("Enter the Course ID of student\n");
+    for(int j=0;j<5;j++){
+        scanf("%d",&std[i].course_id[j]);
+    }
+    printf("Enter the CGPA of Student\n");
+    scanf("%f",&std[i].CGPA);
+    i++;
+}
+
+//Function to find Student by Roll number of Student
+
+void find_roll_num(){
+    int x,found=0;
+    printf("Enter the roll number of Student\n");
+    scanf("%d",&x);
+    for(int j=0;j<i;j++){
+        if(x==std[j ].roll_num){
+            printf("Student details are : \n");
+            printf("----------------------------------------\n");
+            printf("First name of Student : %s\n",std[j].first_name);
+            printf("Last name of Student : %s\n",std[j].last_name);
+            printf("Roll number of Student : %d\n",std[j].roll_num);
+            printf("CGPA of Student : %.2f\n",std[j].CGPA);
+            printf("Course ID of Student are : \n");
+            for(int k=1;k<=5;k++){
+                printf("The course id are %d\n",std[j].course_id[k]);
+                k++;
+                found=1;
+                break;
+            }
+        }
+    }
+    if(!found) printf("Student not found!\n");
+}
+
+//Function to find student by first name o the student.
+
+void find_first_name(){
+    char name[50];
+    int found = 0;
+    printf("Enter the First name of the Student : \n");
+    scanf("%s",&name);
+    for(int j=0;j<i;j++){
+        if(strcmp(name,std[j].first_name)==0){
+            printf("Student details are : \n");
+            printf("----------------------------------------\n");
+            printf("first name of Student : %s\n",std[j].first_name);
+            printf("Last name of Student : %s\n",std[j].last_name);
+            printf("Roll number of Student : %d\n",std[j].roll_num);
+            printf("Course ID of Student are : \n");
+            printf("CGPA of Student : %.2f\n",std[j].CGPA);
+            for(int k=1;k<=5;k++){
+                printf("The course id are %d\n",std[j].course_id[k]);
+                k++;
+                found=1;
+                break;
+            }
+        }  
+    }
+    if(!found) printf("No student found with that name.\n");
+}
+
+//Funtion to find the number of Students in a course.
+
+void find_course_id(){
+    int c_id, found=0;
+    printf("Enter the Course ID : \n");
+    scanf("%d",&c_id);
+    for(int j=0;j<i;j++){
+        for(int d=0;d<5;d++){
+            if(c_id==std[j].course_id[d]){
+                printf("Student details are : \n");
+                printf("----------------------------------------\n");
+                printf("first name of Student : %s\n",std[j].first_name);
+                printf("Last name of Student : %s\n",std[j].last_name);
+                printf("Roll number of Student : %d\n",std[j].roll_num);
+                printf("CGPA of Student : %.2f\n",std[j].CGPA);
+                found=1;
+            }
+        }
+    }
+    if(!found) printf("No students found in this course.\n");
+}
+
+//Function to print total number of Students.
+
+void total_std(){
+    printf("Total number of student : %d\n",i);
+    printf("You can have max 50 students\n");
+    printf("You can have %d more students \n",100-i);
+}
+
+//Function to Delete a Student by his roll number.
+
+void delete_std(){
+    int roll_num, found=0;
+    printf("Enter the Roll number of Student whome you want to Delete: \n");
+    scanf("%d",&roll_num);
+    for(int j=0;j<i;j++){
+        if(roll_num==std[j].roll_num){
+            for(int k=j;k<i-1;k++){
+                std[k]=std[k+1];
+            }
+            i--;
+            found=1;
+            printf("Removed successfully.\n");
+            break;
+        }
+    }
+    if(!found) printf("Roll number not found.\n");
+}
+
+//Function to update a Student's Data.
+
+void update_std(){
+    printf("Enter the Roll number to update Student's Data : \n");
+    int r_num, found=0;
+    printf("Enter Roll number to update: ");
+    scanf("%d",&r_num);
+    for(int j=0;j<i;j++){
+        if(std[j].roll_num==r_num){
+            found=1;
+            printf("1) First name\n 2) Last name\n 3) Roll number\n 4) CGPA\n 5) Course id\n");
+        
+            int n;
+            scanf("%d",&n);
+            switch(n){
+                case 1: printf("Enter the new first name:\n");
+                        scanf("%s",&std[j].first_name);
+                        break;
+                case 2: printf("Enter the new last name:\n");
+                        scanf("%s",&std[j].last_name);
+                        break;
+                case 3: printf("Enter the new Roll number:\n");
+                        scanf("%d",&std[j].roll_num);
+                        break;
+                case 4: printf("Enter the new CGPA:\n");
+                        scanf("%f",&std[j].CGPA);
+                        break;
+                case 5: printf("Enter the new Course id's:\n");
+                        scanf("%d %d %d %d %d",&std[j].course_id[1],&std[j].course_id[2],&std[j].course_id[3],&std[j].course_id[4],&std[j].course_id[5]);
+                        break;
+            }
+            printf("UPDATED SUCESSFULLY\n");
+        }
+    }
+    if(!found) printf("Not found.\n");
+}
+
+//Driver code
+
+int main(){
+    int choice,count;
+    while(1){
+        printf("The task that you want to perform :\n");
+        printf("1. Add the Student Detail: \n");
+        printf("2. Find the Student Details by Roll Number\n");
+        printf("3. Find the Student Details by First Name\n");
+        printf("4. Find the Student Details by Course Id\n");
+        printf("5. Find the Total number of Students\n");
+        printf("6. Delete the Students Details by Roll Number\n");
+        printf("7. Update the Students Details by Roll Number\n");
+        printf("8. To Exit\n");
+
+        printf("Enter your choice to find the task\n");
+        if(scanf("%d", &choice) != 1) break;
+        switch(choice){
+            case 1: add_std();
+                    break;
+            case 2: find_roll_num();
+                    break;
+            case 3: find_first_name();
+                    break;
+            case 4: find_course_id();
+                    break;
+            case 5: total_std();
+                    break;
+            case 6: delete_std();
+                    break;
+            case 7: update_std();
+                    break;
+            case 8: exit(0);
+                    break;
+            default: printf("Invalid choice!\n");
+        }
+    }
+    return 0;
+}
